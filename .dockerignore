@@ -1,0 +1,21 @@
+# Ignore Node dependencies (Prevents OS conflicts and saves massive build time)
+node_modules
+npm-debug.log
+
+# Ignore environment variables (Keeps secrets out of your built image)
+.env
+.env.*
+!.env.example
+
+# Ignore SvelteKit build output folders
+.svelte-kit
+build
+dist
+
+# Ignore Git files
+.git
+.gitignore
+
+# Ignore Docker related files
+Dockerfile
+docker-compose.yml

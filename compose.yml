@@ -1,0 +1,49 @@
+name: tamika
+services:
+  tamika:
+    build: .
+    container_name: tamika
+    env_file:
+      - ./.env
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+    networks:
+      - tamikanet
+    command: sh -c "npm install && npm run dev -- --host"
+    depends_on:
+      pocketbase:
+        condition: service_healthy
+
+  pocketbase:
+    image: ghcr.io/muchobien/pocketbase:latest
+    container_name: tamika-pocketbase
+    restart: always
+    env_file:
+      - ./.env
+    ports:
+      - "8090:8090"
+    environment:
+      PB_PORT: 8090
+      # Learn more: https://pocketbase.io/docs/going-to-production/#enable-settings-encryption
+      ENCRYPTION: "$(openssl rand -hex 16)"
+      # Auto-create Superuser
+      PB_ADMIN_EMAIL: ${PB_ADMIN_EMAIL}
+      PB_ADMIN_PASSWORD: ${PB_ADMIN_PASSWORD}
+    volumes:
+      - ./pb_data:/pb_data
+      - ./pb_public:/pb_public
+      - ./pb_hooks:/pb_hooks
+    networks:
+      - tamikanet
+    healthcheck:
+      test: [ "CMD", "wget", "--spider", "http://localhost:8090/api/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+networks:
+  tamikanet:
+    driver: bridge
