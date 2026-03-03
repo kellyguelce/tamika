@@ -8,9 +8,11 @@
     --font-sans: "Kode Mono", monospace;
 }
 
-.wave {
-    animation: wave 1s linear infinite ;
-    animation-delay: calc(1s - var(--i));
+@layer base {
+    .wave {
+        animation: wave 1.5s linear infinite ;
+        animation-delay: calc(1s - var(--i));
+    }
 }
     
 @keyframes wave {

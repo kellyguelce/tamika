@@ -13,6 +13,8 @@ export enum Collections {
 	Superusers = "_superusers",
 	Bgs = "bgs",
 	RadioStations = "radio_stations",
+	Settings = "settings",
+	UserSettings = "user_settings",
 	Users = "users",
 }
 
@@ -112,6 +114,22 @@ export type RadioStationsRecord = {
 	updated: IsoAutoDateString
 }
 
+export type SettingsRecord = {
+	created: IsoAutoDateString
+	id: string
+	slug: string
+	updated: IsoAutoDateString
+	value: string
+}
+
+export type UserSettingsRecord = {
+	created: IsoAutoDateString
+	id: string
+	settings: RecordIdString[]
+	updated: IsoAutoDateString
+	user: RecordIdString
+}
+
 export type UsersRecord = {
 	avatar?: FileNameString
 	created: IsoAutoDateString
@@ -133,6 +151,8 @@ export type OtpsResponse<Texpand = unknown> = Required<OtpsRecord> & BaseSystemF
 export type SuperusersResponse<Texpand = unknown> = Required<SuperusersRecord> & AuthSystemFields<Texpand>
 export type BgsResponse<Texpand = unknown> = Required<BgsRecord> & BaseSystemFields<Texpand>
 export type RadioStationsResponse<Texpand = unknown> = Required<RadioStationsRecord> & BaseSystemFields<Texpand>
+export type SettingsResponse<Texpand = unknown> = Required<SettingsRecord> & BaseSystemFields<Texpand>
+export type UserSettingsResponse<Texpand = unknown> = Required<UserSettingsRecord> & BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
 
 // Types containing all Records and Responses, useful for creating typing helper functions
@@ -145,6 +165,8 @@ export type CollectionRecords = {
 	_superusers: SuperusersRecord
 	bgs: BgsRecord
 	radio_stations: RadioStationsRecord
+	settings: SettingsRecord
+	user_settings: UserSettingsRecord
 	users: UsersRecord
 }
 
@@ -156,6 +178,8 @@ export type CollectionResponses = {
 	_superusers: SuperusersResponse
 	bgs: BgsResponse
 	radio_stations: RadioStationsResponse
+	settings: SettingsResponse
+	user_settings: UserSettingsResponse
 	users: UsersResponse
 }
 
