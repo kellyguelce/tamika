@@ -27,7 +27,7 @@
 
 <div
 	class="relative flex w-xs items-center justify-start space-x-2 rounded-xl bg-black/25
-		p-3 text-white backdrop-blur-2xl"
+		p-3 text-white opacity-50 backdrop-blur-2xl transition-opacity hover:opacity-100"
 >
 	<button onclick={() => play()} class="size-6">
 		{#if RadioStore.isPlaying}
