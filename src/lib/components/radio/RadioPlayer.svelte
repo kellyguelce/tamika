@@ -5,6 +5,8 @@
 	import SoundWave from '../ui/SoundWave.svelte'
 	import RadioStations from './RadioStations.svelte'
 	import RadioStore from '$lib/modules/radio/radio.svelte'
+	import { onMount } from 'svelte'
+	import StationStore from '$lib/modules/station/station.svelte'
 
 	let expanded = $state(false),
 		station = $derived(RadioStore.station),
@@ -21,8 +23,6 @@
 	function toggleRadioPlayerExpansion() {
 		expanded = !expanded
 	}
-
-	$effect(() => console.log(RadioStore.isPlaying))
 </script>
 
 <div

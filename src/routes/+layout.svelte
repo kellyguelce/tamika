@@ -4,15 +4,14 @@
 	import Background from '$lib/components/Background.svelte'
 	import { onMount } from 'svelte'
 	import { pocketbase } from '$lib/pocketbase.js'
-	import StationStore from '$lib/modules/station/station.svelte.js'
+	import StationStore from '$lib/modules/station/station.svelte'
 	import RadioStore from '$lib/modules/radio/radio.svelte.js'
 
 	let { data, children } = $props()
 
 	onMount(() => {
 		/**
-		 * 1. Load the stations into global states
-		 * 2. Get a random station
+		 * Load the stations into global states
 		 */
 		RadioStore.setStation(StationStore.load(data.stations).randomStation())
 

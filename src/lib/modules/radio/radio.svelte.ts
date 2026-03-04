@@ -7,7 +7,7 @@ class _RadioStore {
      */
     station = $state<RadioStationsRecord | null>(null)
 
-    isPlaying = $derived.by(() => this.element ? !this.element.paused : false)
+    isPlaying = $state(false)
     element = $state<HTMLAudioElement | null>(null)
 
     /*
@@ -29,9 +29,10 @@ class _RadioStore {
     */
 
     setStation(station: RadioStationsRecord | undefined): this {
-        if (station && station != this.station && this.element !== null) {
+        if (station && station != this.station) {
             this.station = station
-            this.element.load()
+
+            if (this.element !== null) this.element.load()
         }
 
         return this
@@ -60,11 +61,13 @@ class _RadioStore {
             return
         }
 
+        this.isPlaying = true
         this.element.play().catch(console.error)
     }
 
     pause(): void {
         if (this.element == null) return
+        this.isPlaying = false
         this.element.pause()
     }
 
