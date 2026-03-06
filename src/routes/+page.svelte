@@ -2,6 +2,7 @@
 	import DateTime from '$lib/components/DateTime.svelte'
 	import Pomodoro from '$lib/components/pomodoro/Pomodoro.svelte'
 	import RadioPlayer from '$lib/components/radio/RadioPlayer.svelte'
+	import type { PageProps } from './$types'
 </script>
 
 <main class="relative grid">

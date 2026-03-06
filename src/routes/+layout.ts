@@ -13,8 +13,11 @@ export const load: LayoutLoad = async ({ fetch }) => {
         stations = await pocketbase.collection('radio_stations').getFullList({
             fetch
         })
-    } catch (error) { }
 
+    } catch (error) {
+    }
+
+    console.log(stations)
     return {
         stations
     }

@@ -27,7 +27,7 @@ services:
     environment:
       PB_PORT: 8090
       # Learn more: https://pocketbase.io/docs/going-to-production/#enable-settings-encryption
-      ENCRYPTION: "$(openssl rand -hex 16)"
+      ENCRYPTION: ${PB_ENCRYPTION_KEY}
       # Auto-create Superuser
       PB_ADMIN_EMAIL: ${PB_ADMIN_EMAIL}
       PB_ADMIN_PASSWORD: ${PB_ADMIN_PASSWORD}
@@ -38,7 +38,7 @@ services:
     networks:
       - tamikanet
     healthcheck:
-      test: [ "CMD", "wget", "--spider", "http://localhost:8090/api/health" ]
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8090/_/ || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
