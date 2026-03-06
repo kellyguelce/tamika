@@ -21,7 +21,11 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
-# SQLite
+
+# SQLite - Pocketbase
+pb_data/*.db
+pb_data/*.db-wal
+pb_data/*.db-shm
 *.db
 *.db-shm
 *.db-wal

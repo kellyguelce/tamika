@@ -34,6 +34,6 @@
 	})
 </script>
 
-<div class="text-4xl font-black text-white">
+<div class="text-2xl font-black text-white opacity-50 transition-opacity hover:opacity-100">
 	<span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
 </div>
