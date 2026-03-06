@@ -15,7 +15,7 @@
 	})
 </script>
 
-<div class="flex flex-col space-y-2">
+<div class="flex flex-col">
 	<div>
 		<input
 			type="text"

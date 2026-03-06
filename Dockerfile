@@ -1,6 +1,5 @@
-FROM node:20
+FROM node
 WORKDIR /app
-
 # Copy requiements
 COPY package*.json ./
 # Install requirements
