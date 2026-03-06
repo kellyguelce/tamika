@@ -12,6 +12,11 @@
 
 	onMount(() => {
 		/**
+		 * Load shared store
+		 */
+		// SharedStore.init()
+
+		/**
 		 * Load the stations into global states
 		 */
 		RadioStore.setStation(StationStore.load(data.stations).randomStation())
