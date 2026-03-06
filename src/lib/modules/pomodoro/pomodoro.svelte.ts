@@ -83,6 +83,10 @@ class _PomodoroStore {
         }
     }
 
+    break(seconds: number) {
+        this.stop()
+        this.#value = seconds
+    }
 }
 
 export const PomodoroStore = new _PomodoroStore()
