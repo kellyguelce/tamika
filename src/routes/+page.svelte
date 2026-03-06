@@ -1,6 +1,7 @@
 <script lang="ts">
 	import DateTime from '$lib/components/DateTime.svelte'
 	import RadioPlayer from '$lib/components/radio/RadioPlayer.svelte'
+	import type { PageProps } from './$types'
 </script>
 
 <main class="relative grid"></main>
