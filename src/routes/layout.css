@@ -3,7 +3,6 @@
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 
-
 @theme {
     --font-sans: "Kode Mono", monospace;
 }
@@ -12,6 +11,10 @@
     .wave {
         animation: wave 1.5s linear infinite ;
         animation-delay: calc(1s - var(--i));
+    }
+
+    .trx {
+        @apply opacity-50 transition-opacity hover:opacity-90
     }
 }
     
