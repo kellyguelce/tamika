@@ -2,6 +2,7 @@ class _PomodoroStore {
 
     #value = $state(25 * 60)
     #interval = $state<NodeJS.Timeout | null>(null)
+    isCurrentlyOnBreak = $state(false)
 
     constructor() {
 
@@ -70,9 +71,23 @@ class _PomodoroStore {
         this.#value -= v
     }
 
-    start() {
+    start(seconds?: number) {
+        if (this.interval != null) return
+        if (seconds) this.value = seconds
         this.#interval = setInterval(() => {
-            this.#value -= 1
+
+            if (this.#value <= 0) {
+                this.stop()
+                if (this.isCurrentlyOnBreak) {
+                    this.isCurrentlyOnBreak = false
+                    this.start(25 * 60)
+                } else {
+                    this.isCurrentlyOnBreak = true
+                    this.break(5 * 60)
+                }
+            } else {
+                this.#value -= 1
+            }
         }, 1000)
     }
 
@@ -85,7 +100,19 @@ class _PomodoroStore {
 
     break(seconds: number) {
         this.stop()
+        this.isCurrentlyOnBreak = true
         this.#value = seconds
+    }
+
+    skipBreak() {
+        this.stop()
+        this.#value = 25 * 60
+        this.isCurrentlyOnBreak = false
+    }
+
+    reset() {
+        this.stop()
+        this.#value = 25 * 60
     }
 }
 

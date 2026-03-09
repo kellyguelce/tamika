@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { sfx } from '$lib/actions/sfx'
 	import { PomodoroStore } from '$lib/modules/pomodoro'
-	import { Minus, Plus } from 'lucide-svelte'
+	import { Minus, Plus, RotateCcw, SkipForward } from 'lucide-svelte'
 	import { onMount } from 'svelte'
+	import { fly } from 'svelte/transition'
 
 	let pomodoro = PomodoroStore
 
@@ -23,44 +24,66 @@
 		pomodoro.break(5 * 60)
 	}
 
-	function longBreak() {
-		pomodoro.break(10 * 60)
+	function skipBreak() {
+		pomodoro.skipBreak()
+	}
+
+	function reset() {
+		pomodoro.reset()
 	}
 
 	onMount(() => {})
 </script>
 
-<div
-	class="fixed top-8 left-[4vw] flex w-xs flex-col space-y-2 text-white opacity-50 transition-opacity hover:opacity-100"
->
-	<div class="overflow-hidden rounded-2xl bg-black/30">
+<div class="fixed top-8 left-[4vw] flex w-xs flex-col space-y-2 text-white">
+	<div class="overflow-hidden rounded-2xl bg-black/10">
 		<div class="flex items-center justify-center">
-			<button class="p-4 hover:bg-black/30" onclick={() => minus()} use:sfx>
+			<button class="trx p-4 hover:bg-black/30" onclick={() => minus()} use:sfx>
 				<Minus />
 			</button>
-			<button class="flex-1 cursor-pointer text-center text-xl font-black" onclick={() => toggle()}>
+			<button
+				class="trx flex-1 cursor-pointer text-center text-xl font-black"
+				onclick={() => toggle()}
+			>
 				{pomodoro.value}
 			</button>
-			<button class="p-4 hover:bg-black/30" onclick={() => plus()} use:sfx>
+			<button class="trx p-4 hover:bg-black/30" onclick={() => plus()} use:sfx>
 				<Plus />
 			</button>
 		</div>
 	</div>
 
-	<div class="flex items-center justify-center space-x-2 overflow-hidden text-white/75">
-		<button
-			class="flex-1 rounded-lg bg-black/30 px-3 py-1 text-xs"
-			onclick={() => shortBreak()}
-			use:sfx
-		>
-			Short Break
-		</button>
-		<button
-			class="flex-1 rounded-lg bg-black/30 px-3 py-1 text-xs"
-			onclick={() => longBreak()}
-			use:sfx
-		>
-			Long Break
-		</button>
+	<div class="flex items-center justify-center space-x-1 overflow-hidden px-4 text-white/75">
+		{#if pomodoro.interval && !pomodoro.isCurrentlyOnBreak}
+			<button
+				class="trx flex h-6 flex-1 items-center justify-center rounded-xl bg-black/30 text-xs"
+				in:fly
+				// out:fly
+				onclick={() => shortBreak()}
+				use:sfx
+			>
+				Skip to Break
+			</button>
+			<button
+				class="trx flex size-6 w-6 cursor-pointer items-center justify-center rounded-xl bg-black/30 text-xs"
+				in:fly
+				// out:fly
+				use:sfx
+				onclick={() => reset()}
+			>
+				<RotateCcw class="size-3" />
+			</button>
+		{/if}
+		{#if pomodoro.isCurrentlyOnBreak}
+			<button
+				class="trx flex size-6 w-6 cursor-pointer items-center justify-center rounded-xl bg-black/30 text-xs"
+				in:fly
+				// out:fly
+				use:sfx
+				onclick={() => skipBreak()}
+			>
+				<SkipForward class="size-3" />
+			</button>
+		{/if}
 	</div>
 </div>
