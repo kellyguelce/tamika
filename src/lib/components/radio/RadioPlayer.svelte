@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { RadioStationsRecord } from '$lib/pocketbase-types'
+	import type { RadioStationsRecord } from '$lib/pocketbase/pocketbase-types'
 	import { Pause, Play } from 'lucide-svelte'
 	import { fade, slide } from 'svelte/transition'
 	import SoundWave from '../ui/SoundWave.svelte'

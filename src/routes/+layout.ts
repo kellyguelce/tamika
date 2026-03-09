@@ -1,5 +1,4 @@
-import { pocketbase } from "$lib/pocketbase"
-import type { RadioStationsRecord } from "$lib/pocketbase-types"
+import { pocketbase, type RadioStationsRecord } from "$lib/pocketbase"
 import type { LayoutLoad } from "./$types"
 
 export const ssr = false
@@ -17,7 +16,6 @@ export const load: LayoutLoad = async ({ fetch }) => {
     } catch (error) {
     }
 
-    console.log(stations)
     return {
         stations
     }

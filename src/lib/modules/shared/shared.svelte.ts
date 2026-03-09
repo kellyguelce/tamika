@@ -1,6 +1,8 @@
 class _Shared {
 
-    init() { }
+    init() {
+
+    }
 }
 
 export const SharedStore = new _Shared()

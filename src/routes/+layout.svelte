@@ -3,18 +3,20 @@
 	import favicon from '$lib/assets/favicon.svg'
 	import Background from '$lib/components/Background.svelte'
 	import { onMount } from 'svelte'
-	import { pocketbase } from '$lib/pocketbase.js'
+	// import { pocketbase } from '$lib/pocketbase'
 	import StationStore from '$lib/modules/station/station.svelte'
 	import RadioStore from '$lib/modules/radio/radio.svelte.js'
 	import BannerMessage from '$lib/components/BannerMessage.svelte'
+	import { SharedStore } from '$lib/modules/shared/shared.svelte.js'
+	import { BackgroundStore } from '$lib/modules/background/background.svelte.js'
 
 	let { data, children } = $props()
 
 	onMount(() => {
 		/**
-		 * Load shared store
+		 * Load stores
 		 */
-		// SharedStore.init()
+		SharedStore.init()
 
 		/**
 		 * Load the stations into global states

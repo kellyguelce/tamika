@@ -35,7 +35,7 @@
 	onMount(() => {})
 </script>
 
-<div class="fixed top-8 left-[4vw] flex w-xs flex-col space-y-2 text-white">
+<div class="flex w-xs flex-col space-y-2 text-white">
 	<div class="overflow-hidden rounded-2xl bg-black/10">
 		<div class="flex items-center justify-center">
 			<button class="trx p-4 hover:bg-black/30" onclick={() => minus()} use:sfx>

@@ -14,7 +14,7 @@
 		"format": "prettier --write .",
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run",
-		"type:generate": "npx pocketbase-typegen --url http://tamika-pocketbase:8090 --email ${PB_ADMIN_EMAIL} --password ${PB_ADMIN_PASSWORD} --out src/lib/pocketbase-types.ts"
+		"type:generate": "npx pocketbase-typegen --url http://tamika-pocketbase:8090 --email ${PB_ADMIN_EMAIL} --password ${PB_ADMIN_PASSWORD} --out src/lib/pocketbase/pocketbase-types.ts"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^2.0.2",

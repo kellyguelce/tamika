@@ -1,7 +1,7 @@
 <script lang="ts">
 	import RadioStore from '$lib/modules/radio/radio.svelte'
-	import { pocketbase } from '$lib/pocketbase'
-	import type { RadioStationsRecord } from '$lib/pocketbase-types'
+	import { pocketbase } from '$lib/pocketbase/'
+	import type { RadioStationsRecord } from '$lib/pocketbase/pocketbase-types'
 	import { Heart } from 'lucide-svelte'
 
 	let { station }: { station: RadioStationsRecord } = $props(),

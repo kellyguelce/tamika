@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Contexts } from '$lib/modules/shared/defs'
-	import type { RadioStationsRecord } from '$lib/pocketbase-types'
+	import type { RadioStationsRecord } from '$lib/pocketbase/pocketbase-types'
 	import { getContext } from 'svelte'
 	import RadioStationRow from './RadioStationRow.svelte'
 	import { slide } from 'svelte/transition'
