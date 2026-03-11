@@ -1,4 +1,4 @@
-import { pocketbase } from "$lib/pocketbase"
+import { pocketbase } from "$lib/pocketbase/pocketbase"
 import type { BgsRecord, RadioStationsRecord } from "$lib/pocketbase/pocketbase-types"
 import type { LayoutLoad } from "./$types"
 

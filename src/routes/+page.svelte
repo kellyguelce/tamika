@@ -2,8 +2,12 @@
 	import DateTime from '$lib/components/DateTime.svelte'
 	import Pomodoro from '$lib/components/pomodoro/Pomodoro.svelte'
 	import RadioPlayer from '$lib/components/radio/RadioPlayer.svelte'
+	import BackgroundSettings from '$lib/components/settings/BackgroundSettings.svelte'
 	import SettingMenuFloating from '$lib/components/settings/SettingMenuFloating.svelte'
-	import type { PageProps } from './$types'
+	import { SettingBox } from '$lib/modules/settings/settings.defs'
+	import { SettingsStore } from '$lib/modules/settings/settings.svelte'
+
+	const settings = SettingsStore
 </script>
 
 <main class="relative grid">
@@ -22,3 +26,7 @@
 		<DateTime />
 	</div>
 </footer>
+
+{#if settings.currentSettingsBox == SettingBox.Background}
+	<BackgroundSettings />
+{/if}

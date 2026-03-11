@@ -7,7 +7,6 @@
 	import RadioStore from '$lib/modules/radio/radio.svelte.js'
 	import BannerMessage from '$lib/components/BannerMessage.svelte'
 	import { SharedStore } from '$lib/modules/shared/shared.svelte.js'
-	import { BackgroundStore } from '$lib/modules/background/background.svelte.js'
 
 	let { data, children } = $props()
 

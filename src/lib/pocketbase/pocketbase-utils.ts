@@ -1,4 +1,5 @@
 import { pocketbase } from "./pocketbase";
+import type { FileNameString } from "./pocketbase-types";
 
 interface Record {
     [key: string]: any
@@ -6,7 +7,7 @@ interface Record {
 
 export function pbFileUrl(
     record: Record,
-    filename: string,
+    filename: string | FileNameString,
     _thumb: string = '100x100',
     download: boolean = false
 ) {

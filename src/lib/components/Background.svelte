@@ -1,5 +1,5 @@
 <script>
-	import { BackgroundStore } from '$lib/modules/background/'
+	import { BackgroundStore } from '$lib/modules/background/background.svelte'
 	import { fade } from 'svelte/transition'
 </script>
 
@@ -9,15 +9,16 @@
 			src={BackgroundStore.backgroundUrl}
 			class="h-full w-full object-cover"
 			autoplay
-			out:fade
-			in:fade
+			// out:fade
+			// in:fade
+			disablepictureinpicture
+			disableremoteplayback
 		>
 			<track kind="captions" />
 		</video>
 	{:else}
 		<img
 			in:fade
-			out:fade
 			src={BackgroundStore.backgroundUrl}
 			alt={BackgroundStore.background.name}
 			class="h-full w-full object-cover"

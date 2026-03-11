@@ -1,11 +1,11 @@
 <script lang="ts">
 	import RadioStore from '$lib/modules/radio/radio.svelte'
-	import { pocketbase } from '$lib/pocketbase/'
 	import type { RadioStationsRecord } from '$lib/pocketbase/pocketbase-types'
+	import { pbFileUrl } from '$lib/pocketbase/pocketbase-utils'
 	import { Heart } from 'lucide-svelte'
 
 	let { station }: { station: RadioStationsRecord } = $props(),
-		logo = () => pocketbase.files.getURL(station, station.logo),
+		logo = () => pbFileUrl(station, station.logo),
 		isCurrentlyPlaying = $derived(RadioStore.station == station),
 		isFavourite = $state(false)
 

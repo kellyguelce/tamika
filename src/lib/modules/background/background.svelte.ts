@@ -1,5 +1,5 @@
 import { browser } from "$app/environment"
-import { pocketbase } from "$lib/pocketbase"
+import { pocketbase } from "$lib/pocketbase/pocketbase"
 import type { BgsRecord } from "$lib/pocketbase/pocketbase-types"
 import { DefaultBackground, type Background } from "./background.defs"
 
@@ -19,6 +19,7 @@ class _BackgroundStore {
 
     set background(bg: BgsRecord) {
         this.#background = bg
+        localStorage.setItem(this.localStorageItemName, JSON.stringify(bg))
     }
 
     get backgroundUrl() {
