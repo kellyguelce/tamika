@@ -1,4 +1,4 @@
-import type { RadioStationsRecord } from "$lib/pocketbase-types"
+import type { RadioStationsRecord } from "$lib/pocketbase/pocketbase-types"
 
 export class _StationStore {
     stations = $state<RadioStationsRecord[]>([])

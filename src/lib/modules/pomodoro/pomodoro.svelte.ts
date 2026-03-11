@@ -104,10 +104,15 @@ class _PomodoroStore {
         this.#value = seconds
     }
 
-    skipBreak() {
+    skip() {
         this.stop()
-        this.#value = 25 * 60
-        this.isCurrentlyOnBreak = false
+        if (this.isCurrentlyOnBreak) {
+            this.#value = 25 * 60
+            this.isCurrentlyOnBreak = false
+        } else {
+            this.#value = 5 * 60
+            this.isCurrentlyOnBreak = true
+        }
     }
 
     reset() {

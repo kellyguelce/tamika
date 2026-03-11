@@ -1,12 +1,11 @@
 <script lang="ts">
-	import type { RadioStationsRecord } from '$lib/pocketbase-types'
 	import { Pause, Play } from 'lucide-svelte'
 	import { fade, slide } from 'svelte/transition'
 	import SoundWave from '../ui/SoundWave.svelte'
 	import RadioStations from './RadioStations.svelte'
 	import RadioStore from '$lib/modules/radio/radio.svelte'
-	import { onMount } from 'svelte'
-	import StationStore from '$lib/modules/station/station.svelte'
+	import { sfx } from '$lib/actions/sfx'
+	import clickoutside from '$lib/actions/clickoutside'
 
 	let expanded = $state(false),
 		station = $derived(RadioStore.station),
@@ -26,10 +25,11 @@
 </script>
 
 <div
-	class="relative flex w-xs items-center justify-start space-x-2 rounded-xl bg-black/25
-		p-3 text-white opacity-50 backdrop-blur-2xl transition-opacity hover:opacity-100"
+	class="trx relative flex w-xs items-center justify-start space-x-2 rounded-xl
+		bg-black/35 p-3 text-white"
+	use:clickoutside={() => (expanded = false)}
 >
-	<button onclick={() => play()} class="size-6">
+	<button onclick={() => play()} class="size-6" use:sfx>
 		{#if RadioStore.isPlaying}
 			<Pause class="size-5 fill-white/75 stroke-white/50" />
 		{:else}
@@ -37,8 +37,8 @@
 		{/if}
 	</button>
 
-	<p class="line-clamp-1 text-sm">
-		<button onclick={() => toggleRadioPlayerExpansion()} class="cursor-pointer">
+	<p class="line-clamp-1 flex-1 text-sm">
+		<button onclick={() => toggleRadioPlayerExpansion()} class="cursor-pointer" use:sfx>
 			{station?.name || voidStation.name}
 		</button>
 	</p>
@@ -53,7 +53,7 @@
 	{#if expanded}
 		<div
 			class="absolute right-0 bottom-full left-0 mb-2 h-96 w-full overflow-hidden rounded-xl
-				bg-black/25 backdrop-blur-2xl"
+				bg-black/30"
 			in:slide
 			out:slide
 		>
