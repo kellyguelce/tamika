@@ -3,7 +3,6 @@
 	import favicon from '$lib/assets/favicon.svg'
 	import Background from '$lib/components/Background.svelte'
 	import { onMount } from 'svelte'
-	// import { pocketbase } from '$lib/pocketbase'
 	import StationStore from '$lib/modules/station/station.svelte'
 	import RadioStore from '$lib/modules/radio/radio.svelte.js'
 	import BannerMessage from '$lib/components/BannerMessage.svelte'

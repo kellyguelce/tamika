@@ -5,23 +5,42 @@ import { DefaultBackground, type Background } from "./background.defs"
 
 class _BackgroundStore {
     localStorageItemName = 'background'
-    #background = $state<BgsRecord>()
+    #background = $state<BgsRecord | null>(null)
     backgrounds = $state<BgsRecord[]>([])
 
     constructor() {
-        /**
-         * Get the background from localstorage
-         */
-        if (browser) {
-            const bg = localStorage.getItem(this.localStorageItemName)
-            if (!bg) throw new Error('Whoops! An unexpected error occured.')
-            this.#background = JSON.parse(bg)
-        }
+        this.init()
     }
 
     get background() {
-        if (!this.#background) return
-        return pocketbase.files.getUrl(this.#background, this.#background.file)
+        if (!this.#background) throw new Error("Whoops! No background")
+        return this.#background
+    }
+
+    set background(bg: BgsRecord) {
+        this.#background = bg
+    }
+
+    get backgroundUrl() {
+        if (!this.#background) throw new Error("Whoops! No background")
+        return pocketbase.files.getURL(this.#background, this.#background.file)
+    }
+
+    async init() {
+        if (!browser) throw new Error("whoopsie")
+        let cachedBg = this.getCachedBackground()
+        if (cachedBg) {
+            this.#background = JSON.parse(cachedBg) as BgsRecord
+            return
+        }
+
+        let defaultBg = await pocketbase.collection('bgs').getOne('va9h4fckka1ufv9', {
+            fetch
+        })
+
+        this.#background = defaultBg
+
+        return localStorage.setItem(this.localStorageItemName, JSON.stringify(defaultBg))
     }
 
     getCachedBackground() {
@@ -32,7 +51,3 @@ class _BackgroundStore {
 
 
 export const BackgroundStore = new _BackgroundStore()
-
-interface InitParams {
-    backgrounds: BgsRecord[]
-}

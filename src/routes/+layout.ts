@@ -1,4 +1,5 @@
-import { pocketbase, type RadioStationsRecord } from "$lib/pocketbase"
+import { pocketbase } from "$lib/pocketbase"
+import type { BgsRecord, RadioStationsRecord } from "$lib/pocketbase/pocketbase-types"
 import type { LayoutLoad } from "./$types"
 
 export const ssr = false
@@ -6,7 +7,8 @@ export const prerender = true
 
 export const load: LayoutLoad = async ({ fetch }) => {
 
-    let stations: RadioStationsRecord[] = []
+    let stations: RadioStationsRecord[] = [],
+        defaultBackground: BgsRecord | null = null
 
     try {
         stations = await pocketbase.collection('radio_stations').getFullList({
@@ -17,7 +19,7 @@ export const load: LayoutLoad = async ({ fetch }) => {
     }
 
     return {
-        stations
+        stations,
     }
 
 }
