@@ -1,3 +1,4 @@
+import { resetUserSession } from "$lib/modules/auth/auth.utls";
 import { pocketbase } from "./pocketbase";
 import type { FileNameString } from "./pocketbase-types";
 
@@ -30,5 +31,6 @@ export async function pbLoginWithPassword(email: string, password: string) {
 }
 
 export async function pbLogout() {
+    resetUserSession()
     return pocketbase.authStore.clear()
 }

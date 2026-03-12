@@ -10,3 +10,8 @@ export async function createUser(email: string, password: string) {
         passwordConfirm: password
     })
 }
+
+export async function getUser(id: string) {
+    return await pocketbase.collection('users').getOne(id)
+}
+

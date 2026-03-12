@@ -1,5 +1,6 @@
 export enum SettingBox {
     Radio,
     Background,
-    AuthLogin
+    Auth,
+    UserProfile
 }

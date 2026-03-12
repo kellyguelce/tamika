@@ -48,7 +48,7 @@
 			<button
 				class="trx block cursor-pointer rounded-full p-2 text-white hover:bg-white/10"
 				use:sfx
-				onclick={() => openSettingBox(SettingBox.AuthLogin)}
+				onclick={() => openSettingBox(SettingBox.Auth)}
 			>
 				<User class="size-4" />
 			</button>

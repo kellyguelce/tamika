@@ -8,6 +8,8 @@
 	import { toast } from 'svelte-sonner'
 	import { createUser } from '$lib/modules/auth/auth.actions'
 	import { AuthStore } from '$lib/modules/auth/auth.svelte'
+	import { pocketbase } from '$lib/pocketbase/pocketbase'
+	import { SessionStorageAuthSessionItem } from '$lib/modules/auth/auth.defs'
 
 	let email = $state('kellyguelc@gmail.com'),
 		password = $state('passooo'),
@@ -34,6 +36,12 @@
 			}
 		} catch (error) {
 			toast.error('Authentication failed')
+		} finally {
+			if (pocketbase.authStore.isValid && pocketbase.authStore.record !== null) {
+				const userId = pocketbase.authStore.record.id
+				const user = await pocketbase.collection('users').getOne(userId)
+				sessionStorage.setItem(SessionStorageAuthSessionItem, JSON.stringify(user))
+			}
 		}
 	}
 
