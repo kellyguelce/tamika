@@ -1,0 +1,1 @@
+export const LocalStorageAuthItem = 'tamika-auth'

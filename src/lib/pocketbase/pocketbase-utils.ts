@@ -15,3 +15,21 @@ export function pbFileUrl(
     if (download) _fileurl = _fileurl + '&download=1'
     return _fileurl
 }
+
+/*
+|--------------------
+| Auth
+|--------------------
+*/
+export function authCheck(): boolean {
+    return pocketbase.authStore.isValid
+}
+
+export async function pbLoginWithPassword(email: string, password: string) {
+    await pocketbase.collection('users').authWithPassword(email, password)
+    return pocketbase.authStore.record
+}
+
+export async function pbLogout() {
+    return pocketbase.authStore.clear()
+}
