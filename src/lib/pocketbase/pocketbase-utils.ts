@@ -26,8 +26,7 @@ export function authCheck(): boolean {
 }
 
 export async function pbLoginWithPassword(email: string, password: string) {
-    await pocketbase.collection('users').authWithPassword(email, password)
-    return pocketbase.authStore.record
+    return await pocketbase.collection('users').authWithPassword(email, password)
 }
 
 export async function pbLogout() {

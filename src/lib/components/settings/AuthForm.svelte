@@ -2,21 +2,44 @@
 	import clickoutside from '$lib/actions/clickoutside'
 	import { sfx } from '$lib/actions/sfx'
 	import { SettingsStore } from '$lib/modules/settings/settings.svelte'
+	import { pbLoginWithPassword } from '$lib/pocketbase/pocketbase-utils'
 	import { X } from 'lucide-svelte'
 	import { fly } from 'svelte/transition'
+	import { toast } from 'svelte-sonner'
+	import { createUser } from '$lib/modules/auth/auth.actions'
+	import { AuthStore } from '$lib/modules/auth/auth.svelte'
 
-	let email = $state(''),
-		password = $state('')
+	let email = $state('kellyguelc@gmail.com'),
+		password = $state('passooo'),
+		formType = $state<'login' | 'signup'>('login')
 
 	function close() {
 		SettingsStore.currentSettingsBox = null
 	}
 
-	function handleSubmit(e: SubmitEvent) {
+	async function handleSubmit(e: SubmitEvent) {
 		e.preventDefault()
 
 		// Check that password and email are set - not necessary because of "required" and "disabled" (see form)
 		if (!email.length || !password.length) return
+
+		try {
+			if (formType === 'login') {
+				await pbLoginWithPassword(email, password)
+				toast.success("Yay! You're logged in!")
+			} else {
+				await createUser(email, password)
+				pbLoginWithPassword(email, password)
+				toast.success('Account created successfully!')
+			}
+		} catch (error) {
+			toast.error('Authentication failed')
+		}
+	}
+
+	function switchFormType() {
+		if (formType === 'login') return (formType = 'signup')
+		formType = 'login'
 	}
 </script>
 
@@ -34,7 +57,10 @@
 	</div>
 
 	<div class="p-8 text-white">
-		<form action="#" onsubmit={handleSubmit} class="flex flex-col space-y-4">
+		<form action="#" onsubmit={handleSubmit} class="flex flex-col space-y-5">
+			<h2 class="mb-8 text-2xl font-bold">
+				{formType === 'login' ? 'Welcome Back' : 'Create an account'}
+			</h2>
 			<label class="flex flex-col space-y-2">
 				<span>Email</span>
 				<input
@@ -60,9 +86,21 @@
 				/>
 			</label>
 			<button
-				class="cursor-pointer rounded-lg bg-white/90 p-2 text-black disabled:opacity-50"
-				disabled={email.length <= 0 || password.length <= 0}>Login</button
+				class="cursor-pointer rounded-lg bg-white/90 p-2 text-sm text-black disabled:opacity-50"
+				disabled={email.length <= 0 || password.length <= 0}
+				type="submit"
+				use:sfx
 			>
+				{formType.toUpperCase()}
+			</button>
+			<button
+				class="text-xs font-bold underline"
+				type="reset"
+				onclick={() => switchFormType()}
+				use:sfx
+			>
+				{formType === 'login' ? 'Create an account' : 'Login'}
+			</button>
 		</form>
 	</div>
 </div>
