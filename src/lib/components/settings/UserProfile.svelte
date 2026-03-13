@@ -4,6 +4,7 @@
 	import { DefaultAvatar } from '$lib/modules/auth/auth.defs'
 	import { authUser } from '$lib/modules/auth/auth.utls'
 	import { SettingsStore } from '$lib/modules/settings/settings.svelte'
+	import { reloadPage } from '$lib/modules/shared/utls'
 	import { type UsersRecord } from '$lib/pocketbase/pocketbase-types'
 	import { pbLogout } from '$lib/pocketbase/pocketbase-utils'
 	import { X } from 'lucide-svelte'
@@ -17,7 +18,8 @@
 	}
 
 	function logout() {
-		return pbLogout()
+		pbLogout()
+		reloadPage()
 	}
 
 	onMount(async () => {

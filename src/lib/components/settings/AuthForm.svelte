@@ -10,6 +10,7 @@
 	import { AuthStore } from '$lib/modules/auth/auth.svelte'
 	import { pocketbase } from '$lib/pocketbase/pocketbase'
 	import { SessionStorageAuthSessionItem } from '$lib/modules/auth/auth.defs'
+	import { reloadPage } from '$lib/modules/shared/utls'
 
 	let email = $state('kellyguelc@gmail.com'),
 		password = $state('passooo'),
@@ -41,6 +42,7 @@
 				const userId = pocketbase.authStore.record.id
 				const user = await pocketbase.collection('users').getOne(userId)
 				sessionStorage.setItem(SessionStorageAuthSessionItem, JSON.stringify(user))
+				reloadPage()
 			}
 		}
 	}

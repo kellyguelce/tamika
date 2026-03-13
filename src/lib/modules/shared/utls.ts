@@ -1,3 +1,3 @@
-export function clickSound() {
-
+export function reloadPage() {
+    window.location.reload()
 }
