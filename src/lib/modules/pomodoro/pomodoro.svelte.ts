@@ -74,21 +74,22 @@ class _PomodoroStore {
     start(seconds?: number) {
         if (this.interval != null) return
         if (seconds) this.value = seconds
+
         this.#interval = setInterval(() => {
 
             if (this.#value <= 0) {
                 this.stop()
                 if (this.isCurrentlyOnBreak) {
                     this.isCurrentlyOnBreak = false
-                    this.start(25 * 60)
+                    this.#value = 25 * 60
                 } else {
-                    this.isCurrentlyOnBreak = true
                     this.break(5 * 60)
                 }
             } else {
                 this.#value -= 1
             }
         }, 1000)
+
     }
 
     stop() {
