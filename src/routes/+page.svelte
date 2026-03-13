@@ -4,6 +4,7 @@
 	import RadioPlayer from '$lib/components/radio/RadioPlayer.svelte'
 	import AuthForm from '$lib/components/settings/AuthForm.svelte'
 	import BackgroundSettings from '$lib/components/settings/BackgroundSettings.svelte'
+	import Room from '$lib/components/settings/Room.svelte'
 	import SettingMenuFloating from '$lib/components/settings/SettingMenuFloating.svelte'
 	import UserProfile from '$lib/components/settings/UserProfile.svelte'
 	import { SettingBox } from '$lib/modules/settings/settings.defs'
@@ -38,4 +39,6 @@
 	{:else}
 		<AuthForm />
 	{/if}
+{:else if settings.currentSettingsBox == SettingBox.Room}
+	<Room />
 {/if}

@@ -2,6 +2,7 @@
 	import { sfx } from '$lib/actions/sfx'
 	import { SettingBox } from '$lib/modules/settings/settings.defs'
 	import { SettingsStore } from '$lib/modules/settings/settings.svelte'
+	import { pocketbase } from '$lib/pocketbase/pocketbase'
 	import { Birdhouse, Image, Settings, User } from 'lucide-svelte'
 	import { slide } from 'svelte/transition'
 
@@ -13,7 +14,7 @@
 	}
 
 	function openSettingBox(box: SettingBox) {
-		settings.currentSettingsBox = box
+		settings.openBox(box)
 	}
 </script>
 
@@ -39,12 +40,15 @@
 			>
 				<Image class="size-4" />
 			</button>
-			<button
-				class="trx block cursor-pointer rounded-full p-2 text-white hover:bg-white/10"
-				use:sfx
-			>
-				<Birdhouse class="size-4" />
-			</button>
+			{#if pocketbase.authStore.isValid}
+				<button
+					class="trx block cursor-pointer rounded-full p-2 text-white hover:bg-white/10"
+					use:sfx
+					onclick={() => openSettingBox(SettingBox.Room)}
+				>
+					<Birdhouse class="size-4" />
+				</button>
+			{/if}
 			<button
 				class="trx block cursor-pointer rounded-full p-2 text-white hover:bg-white/10"
 				use:sfx

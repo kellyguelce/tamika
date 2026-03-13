@@ -19,7 +19,7 @@
 	}
 
 	function close() {
-		SettingsStore.currentSettingsBox = null
+		SettingsStore.closeBox()
 	}
 
 	onMount(async () => {

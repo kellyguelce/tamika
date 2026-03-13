@@ -1,0 +1,1 @@
+export const SessionStorageRoomItemName = 'tamike-user-room'
