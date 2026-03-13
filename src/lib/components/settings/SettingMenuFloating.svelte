@@ -2,7 +2,7 @@
 	import { sfx } from '$lib/actions/sfx'
 	import { SettingBox } from '$lib/modules/settings/settings.defs'
 	import { SettingsStore } from '$lib/modules/settings/settings.svelte'
-	import { BoomBox, Image, Settings } from 'lucide-svelte'
+	import { Birdhouse, Image, Settings, User } from 'lucide-svelte'
 	import { slide } from 'svelte/transition'
 
 	let expanded = $state(false),
@@ -43,7 +43,14 @@
 				class="trx block cursor-pointer rounded-full p-2 text-white hover:bg-white/10"
 				use:sfx
 			>
-				<BoomBox class="size-4" />
+				<Birdhouse class="size-4" />
+			</button>
+			<button
+				class="trx block cursor-pointer rounded-full p-2 text-white hover:bg-white/10"
+				use:sfx
+				onclick={() => openSettingBox(SettingBox.Auth)}
+			>
+				<User class="size-4" />
 			</button>
 		</div>
 	{/if}

@@ -33,18 +33,26 @@
 
 <div class="flex w-xs flex-col space-y-2 text-white">
 	<div class="overflow-hidden rounded-2xl bg-black/10">
-		<div class="flex items-center justify-center">
-			<button class="trx cursor-pointer p-4 hover:bg-black/30" onclick={() => minus()} use:sfx>
+		<div class="grid grid-cols-12">
+			<button
+				class="trx col-span-2 block cursor-pointer p-4 hover:bg-black/30"
+				onclick={() => minus()}
+				use:sfx
+			>
 				<Minus />
 			</button>
 			<button
-				class="trx block h-full flex-1 cursor-pointer p-4 text-center font-sans-big text-4xl hover:bg-black/30"
+				class="trx col-span-8 block cursor-pointer text-center font-sans-big text-4xl hover:bg-black/30"
 				onclick={() => toggle()}
 				use:sfx
 			>
 				{pomodoro.value}
 			</button>
-			<button class="trx cursor-pointer p-4 hover:bg-black/30" onclick={() => plus()} use:sfx>
+			<button
+				class="trx col-span-2 block cursor-pointer p-4 hover:bg-black/30"
+				onclick={() => plus()}
+				use:sfx
+			>
 				<Plus />
 			</button>
 		</div>

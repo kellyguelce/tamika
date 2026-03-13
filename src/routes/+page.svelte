@@ -2,10 +2,13 @@
 	import DateTime from '$lib/components/DateTime.svelte'
 	import Pomodoro from '$lib/components/pomodoro/Pomodoro.svelte'
 	import RadioPlayer from '$lib/components/radio/RadioPlayer.svelte'
+	import AuthForm from '$lib/components/settings/AuthForm.svelte'
 	import BackgroundSettings from '$lib/components/settings/BackgroundSettings.svelte'
 	import SettingMenuFloating from '$lib/components/settings/SettingMenuFloating.svelte'
+	import UserProfile from '$lib/components/settings/UserProfile.svelte'
 	import { SettingBox } from '$lib/modules/settings/settings.defs'
 	import { SettingsStore } from '$lib/modules/settings/settings.svelte'
+	import { pocketbase } from '$lib/pocketbase/pocketbase'
 
 	const settings = SettingsStore
 </script>
@@ -29,4 +32,10 @@
 
 {#if settings.currentSettingsBox == SettingBox.Background}
 	<BackgroundSettings />
+{:else if settings.currentSettingsBox == SettingBox.Auth}
+	{#if pocketbase.authStore.isValid}
+		<UserProfile />
+	{:else}
+		<AuthForm />
+	{/if}
 {/if}

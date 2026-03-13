@@ -5,8 +5,10 @@
 	import { onMount } from 'svelte'
 	import StationStore from '$lib/modules/station/station.svelte'
 	import RadioStore from '$lib/modules/radio/radio.svelte.js'
-	import BannerMessage from '$lib/components/BannerMessage.svelte'
 	import { SharedStore } from '$lib/modules/shared/shared.svelte.js'
+	import { PomodoroStore } from '$lib/modules/pomodoro/pomodoro.svelte.js'
+	import { AuthStore } from '$lib/modules/auth/auth.svelte.js'
+	import { Toaster } from 'svelte-sonner'
 
 	let { data, children } = $props()
 
@@ -15,6 +17,7 @@
 		 * Load stores
 		 */
 		SharedStore.init()
+		AuthStore.init()
 
 		/**
 		 * Load the stations into global states
@@ -37,11 +40,22 @@
 	})
 </script>
 
-<svelte:head><link rel="icon" href={favicon} /></svelte:head>
+<svelte:head>
+	<title>
+		{PomodoroStore.isCurrentlyOnBreak ? 'Chilling' : 'Locking in'} - {PomodoroStore.value}
+	</title>
+	<link rel="icon" href={favicon} />
+</svelte:head>
 
-{#if data.stations.length <= 0}
-	<BannerMessage type="error" message="Unexpected Error: Unable to retrieve radio stations" />
-{/if}
+<Toaster
+	richColors
+	toastOptions={{
+		classes: {
+			toast: 'opacity-90!'
+		}
+	}}
+/>
+
 <div class="relative">
 	<div class="relative z-10">
 		{@render children()}
